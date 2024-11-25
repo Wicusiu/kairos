@@ -1,7 +1,11 @@
+import { Locale } from '@/features/internationalization/i18n-config';
 import './globals.css';
 
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -21,13 +25,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale };
 }>) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
       >
         {children}
       </body>
